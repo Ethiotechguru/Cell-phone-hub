@@ -1,33 +1,21 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{docTitle}
-        link(rel="stylesheet", href="/nav.css")
-        link(rel="stylesheet", href="/product.css")
-    body
-        header.header 
-            nav.nav 
-                ul.nav-list 
-                    a(href="/") 
-                        li.nav_item Shop
-                    a(href="/admin/add-product")
-                        li.nav_item Add Product
-        div.grid
-            if prods.length > 0
-                each product in prods
-                    article.card_header 
-                        h1.product_title #{product.title}
-                        .card_image
-                            img(src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg", alt="Sony Pro")
-                        .card_content 
-                            h2.product_price #{product.price}
-                            p.product_description #{product.desc}
-                        .card_action 
-                            button.btn Add To Cart
-            else
-                h1 No Products
+extends layouts/mainLayOut.pug
+
+block style 
+    link(rel="stylesheet", href="/product.css")
+block content 
+    div.grid
+        if prods.length > 0
+            each product in prods
+                article.card_header 
+                    h1.product_title #{product.title}
+                    .card_image
+                        img(src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg", alt="Sony Pro")
+                    .card_content 
+                        h2.product_price #{product.price}
+                        p.product_description #{product.desc}
+                    .card_action 
+                        button.btn Add To Cart
+        else
+            h1.no_product No Products
 
 

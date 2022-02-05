@@ -1,5 +1,4 @@
 .grid{
-    /* background-color: purple; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,4 +30,8 @@
     font-size: 1.1em;
     margin-bottom: 10px;
     padding: 7px 20px;
+}
+
+.no_product{
+    color: white;
 }

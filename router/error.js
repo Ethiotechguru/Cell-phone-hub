@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 router.use('/',(req,res)=>{
-    res.status(404).sendFile(path.join(__dirname, '../', 'views', 'error.html'))
+    res.status(404).render('./error.pug',{pageTitle:'No Found'})
 })
 
 module.exports = router;

@@ -15,7 +15,7 @@ router.post("/add-product", (req, res, next) => {
 
 router.get("/add-product", (req, res, next) => {
 	console.log(req.method);
-	res.render("./add-product.pug", { docTitle:'Add Product'});
+	res.render("./add-product.pug", { pageTitle: "Add Product", path:'/add-product' });
 });
 exports.router =router;
 exports.data = data;

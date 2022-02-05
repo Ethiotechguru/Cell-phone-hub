@@ -1,28 +1,15 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{docTitle}
-        link(rel="stylesheet", href="/form.css")
-        link(rel="stylesheet", href="/nav.css")
-    body 
-        header.header 
-            nav.nav 
-                ul.nav-list 
-                    a(href="/") 
-                        li.nav_item Shop
-                    a(href="/admin/add-product")
-                        li.nav_item Add Product
-        div
-            form.form(action="/admin/add-product" method="POST")
-                h1 Add Product 
-                div.form_control
-                    label(for="name") Product
-                    input(type="text", name="title")
-                    label(for="price") Price
-                    input(type="text", name="price")
-                    label(for="desc") Description
-                    input(type="text" name="desc")
-                    button(type="submit") Add Product
+extends layouts/mainLayOut.pug
+block style 
+    link(rel="stylesheet", href="/form.css")
+block content 
+    div
+        form.form(action="/admin/add-product" method="POST")
+            h1 Add Product 
+            div.form_control
+                label(for="name") Product
+                input(type="text", name="title")
+                label(for="price") Price
+                input(type="text", name="price")
+                label(for="desc") Description
+                input(type="text" name="desc")
+                button(type="submit") Add Product
