@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
-
+// const os = require('os')
+const path = require('path')
 const express = require('express');
 const {urlencoded} = require('body-parser');
 
@@ -10,12 +11,15 @@ const notFondRouter = require('./router/error');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', 'views')
+
 app.use(urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname,'public')))
 
-app.use("/admin", adminRouter);
+app.use("/admin", adminRouter.router);
 app.use(shopRouter)
-
-app.use(notFondRouter);
+app.use('/',notFondRouter);
 
 // console.log(__dirname);
 

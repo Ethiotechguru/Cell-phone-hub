@@ -1,0 +1,31 @@
+        .header {
+            background-color: black;
+            color           : white;
+        }
+
+        .nav {
+            background-color: rgb(32, 32, 32);
+        }
+
+        .nav-list {
+            list-style     : none;
+            display        : flex;
+            justify-content: center;
+            padding        : 20px;
+            width          : 40%;
+        }
+
+        .nav-list a:visited:hover {
+            color           : black;
+            background-color: lightgreen;
+        }
+
+        .nav-list a {
+            background-color: maroon;
+            margin          : 20px;
+            padding         : 10px 15px;
+            border-radius   : 15px;
+            color           : white;
+            width           : 140px;
+            text-decoration : none;
+        }

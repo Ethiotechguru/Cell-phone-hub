@@ -1,18 +1,21 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
-const bodyParser = require('body-parser')
 
-// router.use(bodyParser.urlencoded({ extended: false }));
+const data = [];
+
 router.post("/add-product", (req, res, next) => {
-	console.log(req.body);
-	const { title } = req.body;
-	console.log(title);
+    let prodName = req.body.title;
+    let price = req.body.price;
+    let desc = req.body.desc;
+    let iUrl = req.body.image;
+	data.push({ prodName, price, desc, iUrl });
 	res.redirect("/");
 });
 
 router.get("/add-product", (req, res, next) => {
 	console.log(req.method);
-	res.sendFile(path.join(__dirname,'..','views', 'add-product.html'));
+	res.render('./add-product.pug')
 });
-module.exports = router;
+exports.router =router;
+exports.data = data;
