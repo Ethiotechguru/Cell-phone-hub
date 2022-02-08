@@ -1,9 +1,11 @@
 
+const {Product}= require('../models/product')
 const data = [];
 
 const postAddProduct = (req, res, next) => {
 	const {title,price,desc} = req.body;
-	data.push({ prodName:title, price, desc });
+	let prod = new Product(title, price, desc);
+	prod.save();
 	res.redirect("/");
 };
 const getAddProduct = (req, res, next) => {

@@ -1,12 +1,12 @@
-<%- include('./inc/head.ejs') %> 
-<link rel="stylesheet" href="/shop.css">
+<%- include('./inc/head.ejs') %>
+<link rel="stylesheet" href="/products.css">
 </head>
 <body>
     <%- include('./inc/navigation.ejs')%>
     </header>
-    <div class="grid">
-        <% if(prods.length>0) {%> 
-            <% prods.forEach(p=>{%> 
+        <div class="grid">
+        <% if(products.length>0) {%> 
+            <% products.forEach(p=>{%> 
                 <article class="card_header">
                     <h3 class="product_title"><%=p.prodName %> </h3>
                     <div class="card_image">
@@ -32,5 +32,3 @@
     <script src="./mobileNav.js"></script>
 </body>
 </html>
-
-
