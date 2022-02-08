@@ -35,3 +35,12 @@
 .no_product{
     color: white;
 }
+@media screen and (max-width:350px) {
+    .card_header{
+        width: 90%;
+        margin: 10px auto;
+    }
+    .card_image img {
+        width: 90%;
+    }
+}

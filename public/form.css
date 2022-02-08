@@ -8,7 +8,7 @@
     padding: 20px 10px;
 }
 .form_control {
-    padding           : 50px;
+    /* padding           : 50px; */
     display           : flex;
     flex-direction    : column;
 }
@@ -35,4 +35,10 @@ input:focus {
     border-radius   : 5px;
     font-size       : 1.2em;
     outline         : none;
+}
+@media screen and (max-width:720px) {
+    .form{
+        width: 90%;
+        margin: 10px auto;
+    }
 }

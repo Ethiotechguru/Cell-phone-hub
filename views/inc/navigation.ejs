@@ -1,0 +1,30 @@
+<header class="header">
+            <nav class="nav">
+                <ul class ="nav-list">
+                    <a href="/" class="<%=path=== '/' ? 'active' : '' %> ">
+                        <li class="nav_item">Shop</li>
+                    </a>
+                    <a href="/admin/add-product" class="<%=path=== '/add-product' ? 'active' : '' %> ">
+                        <li class="nav_item">Add Product</li>
+                    </a>
+                </ul>
+                <div class="search_box">
+                    <input type="search" placeholder="Search">
+                </div>
+                <div class="dropbox"></div>
+                </div>
+                <ul id="mobile_nav" class ="hide">
+                    <a href="/" >
+                        <li class="mobile_nav_item">Shop</li>
+                    </a>
+                    <a href="/admin/add-product">
+                        <li class="mobile_nav_item" class="<%=path=== '/add-product' ? 'active' : '' %> ">Add Product</li>
+                    </a>
+                </ul>
+                <div class="crusal">
+                    <span class="dash"></span>
+                    <span class="dash"></span>
+                    <span class="dash"></span>
+                    <span class="dash"></span>
+                </div>
+            </nav>

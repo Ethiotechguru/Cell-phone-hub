@@ -1,0 +1,37 @@
+
+    <%- include('./inc/head.ejs') %> 
+    <link rel="stylesheet" href="/product.css">
+</head>
+<body>
+    <%- include('./inc/navigation.ejs')%>
+    </header>
+    <div class="grid">
+        <% if(prods.length>0) {%> 
+            <% prods.forEach(p=>{%> 
+                <article class="card_header">
+                    <h1 class="product_title"><%=p.prodName %> </h1>
+                    <div class="card_image">
+                        <img src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg" alt="Sony Pro">
+                    </div>
+                    <div class="card_content">
+                        <h2 class="product_price">
+                            <%= p.price %> 
+                        </h2>
+                        <p class="product_description"><%=p.desc %> </p>
+                    </div>
+                    <div class="card_action">
+                        <button class="btn" >Add To Cart</button>
+                    </div>
+                </article>
+            <% }) %> 
+        <%}else{%>
+            <h1 class="no_product">Product Not Found</h1>
+        <% } %> 
+    </div>
+    <%-include('./inc/footer.ejs') %> 
+    </footer>
+    <script src="./script/mobileNav.js"></script>
+</body>
+</html>
+
+
