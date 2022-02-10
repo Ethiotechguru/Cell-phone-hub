@@ -20,18 +20,30 @@
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
+
 .card_image img{
     width:300px;
 }
-.btn{
+.btn,.btn_detail{
     margin-bottom: 7px;
     background-color: rgb(77, 15, 77);
     color: white;
     font-size: 1.1em;
     margin-bottom: 10px;
     padding: 7px 20px;
+    /* width: 200px; */
 }
-
+.btn_detail{
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    padding: 8px 20px;
+}
+.card_action{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 .no_product{
     color: white;
 }

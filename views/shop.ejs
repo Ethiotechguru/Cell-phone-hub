@@ -5,8 +5,8 @@
     <%- include('./inc/navigation.ejs')%>
     </header>
     <div class="grid">
-        <% if(prods.length>0) {%> 
-            <% prods.forEach(p=>{%> 
+        <% if(products.length>0) {%> 
+            <% products.forEach(p=>{%> 
                 <article class="card_header">
                     <h3 class="product_title"><%=p.prodName %> </h3>
                     <div class="card_image">
@@ -18,9 +18,10 @@
                         </h4>
                         <p class="product_description"><%=p.desc %> </p>
                     </div>
-                    <div class="card_action">
-                        <button class="btn" id="<%=p.id%> ">Add To Cart</button>
-                    </div>
+                    <form  action="/cart" method="POST" class="card_action">
+                        <button class="btn" type="submit">Add To Cart</button>
+                        <input type="hidden" name ="cartItem" value="<%=p.id%> "/>
+                    </form>
                 </article>
             <% }) %> 
         <%}else{%>
@@ -28,9 +29,5 @@
         <% } %> 
     </div>
     <%-include('./inc/footer.ejs') %> 
-    </footer>
-    <script src="./mobileNav.js"></script>
-</body>
-</html>
 
 

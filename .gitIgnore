@@ -1,5 +1,10 @@
 node_modules/
+data/
+data/carts.json
+data/products.json
+
 index.txt
+
 # Compiled source #
 ###################
 *.com

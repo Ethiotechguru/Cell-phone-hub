@@ -1,0 +1,30 @@
+
+<%- include('./inc/head.ejs') %> 
+<link rel="stylesheet" href="/detail.css">
+</head>
+<body>
+    <%- include('./inc/navigation.ejs')%>
+    </header>
+        <div class="detail_container">
+            <div class="grid">
+                <div class="card_image">
+                    <img src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg" alt="Sony Pro">
+                </div>
+                <article class="card_header">
+                    <h3 class="product_title"><%=product.prodName %> </h3>
+                    <div class="card_content">
+                        <p class="product_description"><%=product.desc %> </p>
+                        <p class="product_price">
+                            $<%= product.price %> 
+                        </p>
+                    </div>
+                    <div class="card_action">
+                        <button class="btn" id="<%=product.id%> ">Add To Cart</button>
+                    </div>
+                </article>
+            </div>
+            <p class="detail_par"><%=product.detail%> </p>
+        </div>
+    <%-include('./inc/footer.ejs') %> 
+
+

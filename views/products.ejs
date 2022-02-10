@@ -19,7 +19,11 @@
                         <p class="product_description"><%=p.desc %> </p>
                     </div>
                     <div class="card_action">
-                        <button class="btn" id="<%=p.id%> ">Add To Cart</button>
+                        <form  action="/cart" method="POST">
+                            <button class="btn" type="submit">Add To Cart</button>
+                            <input type="hidden" name ="cartItem" value="<%=p.id%> "/>
+                        </form>
+                        <a class="btn_detail" href="/products/<%=p.id%> ">Detail</a>
                     </div>
                 </article>
             <% }) %> 
@@ -28,7 +32,3 @@
         <% } %> 
     </div>
     <%-include('./inc/footer.ejs') %> 
-    </footer>
-    <script src="./mobileNav.js"></script>
-</body>
-</html>

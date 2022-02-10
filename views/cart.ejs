@@ -1,12 +1,37 @@
- <%- include('./inc/head.ejs') %> 
+<%- include('./inc/head.ejs') %> 
+<link rel="stylesheet" href="/cart.css">
 </head>
 <body>
     <%- include('./inc/navigation.ejs')%>
-        <div>
-            <h1>This is Cart Page</h1>
+    </header>
+    <% if(cartItems.length>0) {%> 
+    <div class="container">
+        <div class="cart_heading">
+            <h2 >Your Cart</h2>
+            <p>Enjoy Shopping</p>
         </div>
+        <div class="grid">
+                <% cartItems.forEach(p=>{%> 
+                    <article class="cart_container">
+                        <div class="cart_detail_container">
+                            <div class="cart_image">
+                                <img src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg" alt="Sony Pro">
+                            </div>
+                            
+                            <div class="cart_content">
+                                <h3 class="cart_title"><%=p.prodName %> </h3>
+                                <p class="cart_description"><%=p.desc %> </p>
+                                <p class="quntitiy">Quantity <%=p.quantity %> </p>
+                            </div>
+                        </div>
+                        <h3 class="cart_price">
+                            $<%= p.price %> 
+                        </h3>
+                    </article>
+                <% }) %> 
+        </div>
+    </div>
+    <%}else{%>
+        <h1 class="no_product">Product Not Found</h1>
+    <% } %> 
     <%-include('./inc/footer.ejs') %> 
-    </footer>
-    <script src="./mobileNav.js"></script>
-</body>
-</html>

@@ -3,16 +3,15 @@
     <link rel="stylesheet" href="/error.css">
 </head>
 <body>
-    <%-include('./inc/navigation.ejs') %> 
+<%- include('./inc/navigation.ejs')%>
     </header>
         <div class="container">
             <h1 class="page_not_found">Page Not Found</h1>
+            <div class="error_return-home">
+                <a href="/">Go Back Home</a>
+            </div>
             <div class="image_container">
-                <img src="https://c.tenor.com/5P99EGGWUJ4AAAAd/sopevault-dog.gif" alt="page not found" srcset="">
+                <img src="https://c.tenor.com/5P99EGGWUJ4AAAAd/sopevault-dog.gif" alt="page not found">
             </div>
         </div>
     <%-include('./inc/footer.ejs') %> 
-    </footer>
-    <script src="./mobileNav.js"></script>
-</body>
-</html>

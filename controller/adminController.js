@@ -1,6 +1,5 @@
 
 const {Product}= require('../models/product')
-const data = [];
 
 const postAddProduct = (req, res, next) => {
 	const {title,price,desc} = req.body;
@@ -9,14 +8,14 @@ const postAddProduct = (req, res, next) => {
 	res.redirect("/");
 };
 const getAddProduct = (req, res, next) => {
-	res.render("./add-product.ejs", {
+	res.render("add-product.ejs", {
 		pageTitle: "Add Product",
 		path: "/add-product",
 	});
 };
 
-exports.postAddProduct = postAddProduct;
-exports.getAddProduct = getAddProduct;
+module.exports.postAddProduct = postAddProduct;
+module.exports.getAddProduct = getAddProduct;
 
-exports.data = data;
+
 	
