@@ -4,12 +4,11 @@ const path = require("path");
 const p = path.join(__dirname, '..', 'data', 'carts.json');
 
 class Cart {
-	static addProduct(id, product) {
-        console.log(product)
+	static addProduct(id) {
 		fs.readFile(p, (err, fileContent) => {
 			let cart = [];
 			if (!err) {
-				cart = JSON.parse(fileContent);
+				cart = JSON.parse(fileContent)
 			}
 			const idx = cart.findIndex((prod) => prod.id === id);
 			let updatedProduct;
@@ -19,17 +18,24 @@ class Cart {
 				updatedProduct = {
 					id: id,
 					qty: 1,
-					// prodName: product.prodName,
-					// price: product.price,
 				};
 				cart = [...cart, updatedProduct];
 			}
-			console.log(cart);
 			fs.writeFile(p, JSON.stringify(cart), (err) => {
 				console.log(err);
 			});
 		});
 	}
+    static getCartItems(cb){
+        fs.readFile(p, (err, data)=>{
+            if(!err){
+                const items = JSON.parse(data);
+                cb(items)
+            }else{
+                cb([])
+            }
+        })
+    }
 };
 exports.Cart = Cart;
 // const fs = require('fs');

@@ -13,21 +13,33 @@ const getAllProduct = cb =>{
     })
 }
 class Product{
-    constructor(name, price, desc){
+    constructor(id,name, price, desc){
         this.prodName = name;
         this.price = price;
         this.desc = desc;
         this.detail = detail;
-        this.id = Math.floor(Math.random()*1000000).toString();
+        this.id = id;
     }
     save(){
         getAllProduct(prods=>{
-            prods.push(this);
-            fs.writeFile(p, JSON.stringify(prods), (error)=>{
-                if(error){
-					console.log(error);
-				}
-            });
+            if (this.id) {
+				const idx = prods.findIndex(prod=>prod.id === this.id);
+                const products  = [...prods];
+                products[idx] = this;
+                fs.writeFile(p, JSON.stringify(products), err=>{
+                    if(err){
+                        console.log(err);
+                    }
+                })
+			}else{
+                this.id = Math.floor(Math.random() * 1000000).toString();
+				prods.push(this);
+				fs.writeFile(p, JSON.stringify(prods), (error) => {
+					if (error) {
+						console.log(error);
+					}
+				});
+            }
         })
     }
     static fetchAll(cb){
@@ -36,7 +48,6 @@ class Product{
     static findById(id,cb){
         getAllProduct(products=>{
             let p = products.find(prod=>prod.id === id);
-			console.log(p)
             cb(p)
         })
     }
