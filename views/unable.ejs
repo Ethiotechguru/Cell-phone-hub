@@ -5,6 +5,7 @@
     <%- include('./inc/navigation.ejs')%>
     </header>
     <div class="grid">
+        <h2 class="deletion_error">Sorry Your Product is not deleted please try again letter or contact us</h2>
         <% if(products.length>0) {%> 
             <% products.forEach(p=>{%> 
                 <article class="card_header">

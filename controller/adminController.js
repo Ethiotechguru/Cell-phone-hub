@@ -1,6 +1,5 @@
 
 const {Product}= require('../models/product')
-
 const postAddProduct = (req, res, next) => {
 	console.log(req.params.prodId)
 	const {title,price,desc} = req.body;
@@ -15,6 +14,21 @@ const postEditProduct = (req, res, next) => {
 	prod.save();
 	res.redirect("/");
 };
+const postDeleteProduct = (req, res, next)=>{
+	const id = req.body.cartItem;
+	Product.deleteOne(id,(arg)=>{
+		if(arg){
+			res.render("/unable.ejs", {
+				products: arg,
+				pageTitle: "Unable to delete",
+				path: "/admin-product",
+			});
+		}else{
+			res.redirect("/admin-product");
+		}
+		
+	})
+}
 const getAddProduct = (req, res, next) => {
 	res.render("edit-product.ejs", {
 		pageTitle: "Add Product",
@@ -53,6 +67,6 @@ module.exports.getAddProduct = getAddProduct;
 module.exports.getEditProduct = getEditProduct;
 module.exports.getAdminProducts = getAdminProducts;
 module.exports.postEditProduct = postEditProduct;
-
+module.exports.postDeleteProduct = postDeleteProduct;
 
 	
