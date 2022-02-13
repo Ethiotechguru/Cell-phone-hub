@@ -15,18 +15,25 @@
                     <article class="cart_container">
                         <div class="cart_detail_container">
                             <div class="cart_image">
-                                <img src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg" alt="Sony Pro">
+                                <img src=<%=p.imgUrl %> alt="<%=p.title %> ">
                             </div>
                             
                             <div class="cart_content">
-                                <h3 class="cart_title"><%=p.prodName %> </h3>
-                                <p class="cart_description"><%=p.desc %> </p>
-                                <p class="quntitiy">Quantity <%=p.qty %> </p>
+                                <h3 class="cart_title"><%=p.title %> </h3>
+                                <p class="cart_description"><%=p.description %> </p>
+                                <input class="quntitiy" type="number" Quantity <%=p.qty %> value=<%=p.qty%> id=<%=p.id %>  />
                             </div>
                         </div>
-                        <h3 class="cart_price">
-                            $<%= p.price %> 
-                        </h3>
+                        <div class="cart_form">
+                            <h3 class="cart_price">
+                                $<%= p.price %> 
+                            </h3>
+                            <P><%=p.id %> </P>
+                            <form action="/delete-cart" method="POST">
+                                <button class="btn" type="submit">Delete</button>
+                                <input type="hidden"  value="<%=p.cId%>" name="deleteCart">
+                            </form>
+                        </div>
                     </article>
                 <% }) %> 
         </div>

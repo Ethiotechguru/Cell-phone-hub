@@ -4,7 +4,7 @@ data/carts.json
 data/products.json
 
 index.txt
-
+.env
 # Compiled source #
 ###################
 *.com

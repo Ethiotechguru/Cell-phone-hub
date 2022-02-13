@@ -15,7 +15,11 @@ mobileNav.addEventListener("click", (e) => {
 		document.body.style.overflow = "scroll";
 	}
 });
-
+drop.addEventListener("click", () => {
+	m_nav.className = "hide";
+	drop.className = "dropbox";
+	document.body.style.overflow = "scroll";
+});
 setTimeout(() => {
 	if (drop) {
 		drop.addEventListener("click", () => {

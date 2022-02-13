@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { Product } = require("./product");
 
 const p = path.join(__dirname, '..', 'data', 'carts.json');
 
@@ -36,5 +37,16 @@ class Cart {
             }
         })
     }
+	static deleteCartItem(id,cb){
+		this.getCartItems(items=>{
+			const cartProds = items.filter(item=>item.id.trim() !== id.trim());
+			fs.writeFile(p, JSON.stringify(cartProds), (err) => {
+				if (err) {
+					console.log(err);
+				}
+			});
+			cb();
+		})
+	}
 };
 exports.Cart = Cart;

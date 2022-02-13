@@ -8,22 +8,22 @@
         <% if(products.length>0) {%> 
             <% products.forEach(p=>{%> 
                 <article class="card_header">
-                    <h3 class="product_title"><%=p.prodName %> </h3>
+                    <h3 class="product_title"><%=p.title %> </h3>
                     <div class="card_image">
-                        <img src="https://eadn-wc05-1926589.nxedge.io/cdn/pub/media/catalog/product/cache/2264c9e38777ed202d5c3170a063a3cf/c/a/canv1118_1.jpg" alt="Sony Pro">
+                        <img src=<%=p.imgUrl %> alt="<%=p.title %> ">
                     </div>
                     <div class="card_content">
                         <h4 class="product_price">
                             <%= p.price %> 
                         </h4>
-                        <p class="product_description"><%=p.desc %> </p>
+                        <p class="product_description"><%=p.description %> </p>
                     </div>
                     <div class="card_action">
                         <form  action="/cart" method="POST">
                             <button class="btn" type="submit">Add To Cart</button>
-                            <input type="hidden" name ="cartItem" value="<%=p.id%> "/>
+                            <input type="hidden" name ="cartItem" value="<%=p.idnew_table%> "/>
                         </form>
-                        <a class="btn_detail" href="/products/<%=p.id%> ">Detail</a>
+                        <a class="btn_detail" href="/products/<%=p.idnew_table%> ">Detail</a>
                     </div>
                 </article>
             <% }) %> 

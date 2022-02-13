@@ -1,16 +1,20 @@
 
 const {Product}= require('../models/product')
 const postAddProduct = (req, res, next) => {
-	console.log(req.params.prodId)
-	const {title,price,desc} = req.body;
-	let prod = new Product(null,title, price, desc);
-	prod.save();
-	res.redirect("/");
+	console.log(req.body)
+	const {title,price,desc,imgUrl} = req.body;
+	let prod = new Product(null,title, price, desc, imgUrl);
+	prod.save().then(()=>{
+		res.redirect("/");
+	}).catch(err=>{
+		console.log(err)
+	})
+	
 };
 const postEditProduct = (req, res, next) => {
 	const id = req.body.prodId;
-	const { title, price, desc } = req.body;
-	let prod = new Product(id, title, price, desc);
+	const { title, price, desc,imgUrl} = req.body;
+	let prod = new Product(id, title, price, desc, imgUrl);
 	prod.save();
 	res.redirect("/");
 };
@@ -37,11 +41,12 @@ const getAddProduct = (req, res, next) => {
 	});
 };
 const getAdminProducts = (req, res, next)=>{
-	Product.fetchAll(products=>{
+	Product.fetchAll().then(([products]) =>{
+		products.forEach((prod) => console.log(typeof prod.idnew_table));
 		res.render("adminProducts.ejs", {
-			products:products,
-			pageTitle:'Admin Products',
-			path:'/admin-product'
+			products: products,
+			pageTitle: "Admin Products",
+			path: "/admin-product",
 		});
 	});
 	

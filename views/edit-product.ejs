@@ -13,8 +13,10 @@
                 <input type="text" name="title" value="<% if(editMode) {%><%=product.prodName%> <% } %>  ">
                 <label for="price">Price</label>
                 <input type="text" name="price" value="<% if(editMode) {%><%=product.price%> <% } %>">
-                <label for="desc">desc</label>
+                <label for="desc">Description</label>
                 <input type="text" name="desc" value="<% if(editMode) {%><%=product.desc%> <% } %>">
+                <label for="imgUrl">Image Url</label>
+                <input type="text" name="imgUrl" value="<% if(editMode) {%><%=product.desc%> <% } %>">
                 <% if(editMode) {%><input type="hidden" value="<%=product.id%>" name="prodId"><% } %> 
                 <button type="submit"><%if(editMode){%>Update<%}else{%>Add Product<% } %> </button>
             </div>

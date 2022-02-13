@@ -3,7 +3,7 @@ const {Cart} = require('../models/cart');
 const cartItemHelper = require('../utility/cartItemList')
 
 exports.getShopController = (req, res, next) => {
-	Product.fetchAll((products) => {
+	Product.fetchAll().then(([products]) => {
 		res.render("./shop.ejs", {
 			products: products,
 			pageTitle: "Shop",
@@ -14,13 +14,13 @@ exports.getShopController = (req, res, next) => {
 
 exports.getProductDetail = (req, res, next) => {
 	let id = req.params.prodId;
-	Product.findById(id, product => {
+	Product.findById(id).then(([product])=>{
 		res.render("./detail.ejs", {
-			product: product,
-			pageTitle: product.prodName,
+			product: product[0],
+			pageTitle: product[0].title,
 			path: "/products",
 		});
-	});
+	}).catch(err=> console.log(err))
 };
 
 exports.postCartController = (req,res,next)=>{
@@ -29,6 +29,12 @@ exports.postCartController = (req,res,next)=>{
 		Cart.addProduct(id,product)
 		res.redirect("/");
 	})
+}
+exports.postDeleteCart = (req, res,next)=>{
+	const id = req.body.deleteCart;
+	Cart.deleteCartItem(id, ()=>{
+		return res.redirect('/cart')
+	});
 }
 exports.getCart = (req,res,next)=>{
 	Cart.getCartItems((items)=>{
@@ -43,12 +49,14 @@ exports.getCart = (req,res,next)=>{
 	})
 }
 exports.allProducts = (req,res,next)=>{
-	Product.fetchAll((products)=>{
+	Product.fetchAll().then(prods=>{
 		res.render("./products.ejs", {
 			pageTitle: "Products",
 			path: "/products",
-			products: products,
+			products: prods[0],
 		});
-	});
+	}).catch(err=>{
+		console.log(err)
+	})
 }
 
