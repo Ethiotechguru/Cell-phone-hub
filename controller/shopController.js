@@ -1,9 +1,10 @@
-const {Product} = require('../models/product');
+const Product = require('../models/product');
 const {Cart} = require('../models/cart');
 const cartItemHelper = require('../utility/cartItemList')
 
 exports.getShopController = (req, res, next) => {
-	Product.fetchAll().then(([products]) => {
+	
+	Product.findAll().then((products) => {
 		res.render("./shop.ejs", {
 			products: products,
 			pageTitle: "Shop",
@@ -14,10 +15,10 @@ exports.getShopController = (req, res, next) => {
 
 exports.getProductDetail = (req, res, next) => {
 	let id = req.params.prodId;
-	Product.findById(id).then(([product])=>{
+	Product.findByPk(id).then((product)=>{
 		res.render("./detail.ejs", {
-			product: product[0],
-			pageTitle: product[0].title,
+			product: product,
+			pageTitle: product.title,
 			path: "/products",
 		});
 	}).catch(err=> console.log(err))
@@ -49,11 +50,11 @@ exports.getCart = (req,res,next)=>{
 	})
 }
 exports.allProducts = (req,res,next)=>{
-	Product.fetchAll().then(prods=>{
+	Product.findAll().then(prods=>{
 		res.render("./products.ejs", {
 			pageTitle: "Products",
 			path: "/products",
-			products: prods[0],
+			products: prods,
 		});
 	}).catch(err=>{
 		console.log(err)

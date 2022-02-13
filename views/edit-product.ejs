@@ -6,17 +6,17 @@
     <%-include('./inc/navigation.ejs')%>
     </header>
     <div>
-        <form action="/edit-product" class="form" method="POST">
+        <form action="<% if(editMode) {%>/edit-product<%}else{%>/add-product <%}%>" class="form" method="POST">
             <h1>Add Product</h1>
             <div class="form_control">
                 <label for="title">Product</label>
-                <input type="text" name="title" value="<% if(editMode) {%><%=product.prodName%> <% } %>  ">
+                <input type="text" name="title" value="<% if(editMode) {%><%=product.title%> <% } %>  ">
                 <label for="price">Price</label>
                 <input type="text" name="price" value="<% if(editMode) {%><%=product.price%> <% } %>">
                 <label for="desc">Description</label>
-                <input type="text" name="desc" value="<% if(editMode) {%><%=product.desc%> <% } %>">
+                <input type="text" name="desc" value="<% if(editMode) {%><%=product.description%> <% } %>">
                 <label for="imgUrl">Image Url</label>
-                <input type="text" name="imgUrl" value="<% if(editMode) {%><%=product.desc%> <% } %>">
+                <input type="text" name="imgUrl" value="<% if(editMode) {%><%=product.imgUrl%> <% } %>">
                 <% if(editMode) {%><input type="hidden" value="<%=product.id%>" name="prodId"><% } %> 
                 <button type="submit"><%if(editMode){%>Update<%}else{%>Add Product<% } %> </button>
             </div>
