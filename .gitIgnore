@@ -2,7 +2,7 @@ node_modules/
 data/
 data/carts.json
 data/products.json
-
+utility/
 index.txt
 .env
 # Compiled source #

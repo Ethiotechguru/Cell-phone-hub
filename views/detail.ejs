@@ -18,9 +18,13 @@
                             $<%= product.price %> 
                         </p>
                     </div>
-                    <div class="card_action">
+                    <form  action="/cart" method="POST" class="card_action">
+                        <button class="btn" type="submit">Add To Cart</button>
+                        <input type="hidden" name ="cartItem" value="<%=product.id%> "/>
+                    </form>
+                    <!-- <div class="card_action">
                         <button class="btn" id="<%=product.id%> ">Add To Cart</button>
-                    </div>
+                    </div> -->
                 </article>
             </div>
             <p class="detail_par"><%=product.detail%> </p>

@@ -84,7 +84,7 @@ exports.getCart = (req,res,next)=>{
 				cartItems: cartItems,
 				path: "/cart",
 				pageTitle: "Cart",
-				subTotal :subTotal,
+				subTotal :subTotal.toFixed(2),
 			});
 		}).catch(err=>{
 			console.log(err)
