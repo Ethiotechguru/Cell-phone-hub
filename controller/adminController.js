@@ -13,17 +13,13 @@ const postAddProduct = (req, res, next) => {
 			});
 		})
 		.then((result) => {
-			console.log(result);
-			console.log("Product is created");
 			res.redirect("/");
 		}).catch(err=>{
 			console.log(err)
 		})
-	
 };
 const postEditProduct = (req, res, next) => {
 	const id = req.body.prodId;
-	console.log(req.body, 'is coming from edit post')
 	const { title, price, desc,imgUrl} = req.body;
 	Product.findByPk(id)
 		.then((product) => {

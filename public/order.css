@@ -1,0 +1,122 @@
+.container {
+    /* background-color: rgb(255, 255, 255); */
+    width           : 100%;
+    max-width       : 1500px;
+    margin          : 0 auto;
+    padding         : 30px;
+    box-sizing      : border-box;
+    color: #37206d;;
+}
+
+.grid {
+    background-color: white;
+    width           : 90%;
+    margin          : 10px auto;
+    box-shadow      : 1px 2px 5px;
+}
+
+.cart_heading {
+    width           : 90%;
+    margin          : 0 auto;
+    background-color: white;
+    padding         : 10px 0;
+}
+
+.cart_heading h2,
+.cart_heading p {
+    margin: 0 10px;
+}
+
+.cart_container {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 5px 25px;
+}
+
+.cart_detail_container {
+    display        : flex;
+    justify-content: flex-start;
+    align-items    : center;
+}
+
+.cart_image img {
+    width: 200px;
+}
+
+.cart_description {
+    font-size: 1.1em;
+}
+
+.cart_content {
+    padding: 0 15px;
+}
+
+.cart_price {
+    /* color: rgb(177, 39, 4); */
+    color: #37206d;
+}
+
+.no_product {
+    color     : white;
+    text-align: center;
+
+}
+.btn,
+.btn_detail {
+    display: block;
+    background-color: #2d116e;
+    /*background-color: rgb(77, 15, 77);
+    */color: white;
+    width: 150px;
+    font-size:16px;
+    margin-bottom: 10px;
+    padding: 7px 20px;
+    box-sizing: border-box;
+    border: 1px solid #300f7e;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.btn_detail {
+    text-decoration: none;
+}
+.ordered_data{
+    padding: 10px 0 0 25px;
+    border-bottom: 1px solid #37206d;;
+}
+
+.cart_form {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    flex-direction : column;
+}
+
+
+@media screen and (max-width:620px) {
+    .cart_container {
+        flex-direction: column;
+    }
+
+    .cart_content {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:520px) {
+    .cart_detail_container {
+        flex-direction: column;
+    }
+
+    .grid {
+        width: 100%;
+    }
+
+    .cart_heading {
+        width: 100%;
+    }
+}

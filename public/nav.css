@@ -3,11 +3,18 @@ html,body,ul{
     padding: 0;
 }
 .header {
-    background-color: rgb(167, 122, 8);
-    color           : white;
-    /* height: 10vh; */
+    /* background-color: rgb(167, 122, 8); */
+    background-color: #411e94;
+    /* color           : rgb(150, 144, 144); */
+    height: 12vh;
     margin: 0;
     width: 100%;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }
 .nav-list {
     list-style     : none;
@@ -18,32 +25,60 @@ html,body,ul{
 }
 .nav-list a:visited:hover {
     color           : black;
-    background-color: lightgreen;
+    background-color: #A68DE2;
 }
 .nav-list a {
-    background-color: maroon;
+    background-color: #300f7e;
     margin          : 10px;
     padding         : 10px 7px;
     font-size: 1.2em;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     border-radius   : 15px;
-    color           : white;
+    color           : rgba(255, 255, 255, 0.568);
     width           : 140px;
     text-decoration : none;
 }
 body{
-    background-color: rgb(22, 22, 22);
+    background-color: rgb(255, 255, 255);
+    /* background-color: black; */
 }
 a.active{
-    background-color: lightgreen;
+    background-color: #A68DE2;
     color: black;
+}
+.mode-gutter{
+    background-color: white;
+    width: 50px;
+    height: 22px;
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.mode_btn{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 1px;
+    left: 1px;
+    background-color: #300f7e;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    box-shadow: 1px 1px 2px;
 }
 .crusal{
     background-color: black;
     width: 30px;
     position: absolute;
-    top:5px;
+    top:20px;
     right: 10px;
     display: none;
 }
@@ -68,10 +103,11 @@ a.active{
 }
 .mobile_nav{
     position: absolute;
-    top:30px;
+    top:45px;
     right: 10px;
     background-color: rgba(167, 122, 8, 0.87);
     width: 150px;
+    z-index: 1;
 }
 .mobile_nav a{
     display: block;
@@ -129,5 +165,28 @@ a.active{
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
         -o-border-radius: 10px;
+    }
+}
+@media screen and (max-width:600px) {
+    .mode-gutter {
+        top                  : 45px;
+        right                :6px;
+    }
+}
+@media screen and (max-width:500px) {
+    .nav {
+        display        : block;
+        justify-content: center;
+        align-items    : center;
+        height         : 100%;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .mode-gutter {
+        top  : 35px;
+    }
+    .crusal {
+        top             : 10px;
     }
 }

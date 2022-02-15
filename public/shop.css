@@ -4,6 +4,9 @@
     align-items    :stretch;
     flex-wrap      : wrap;
     width          : 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .card_header {
@@ -15,6 +18,7 @@
     background-color: rgb(250, 250, 250);
     padding              : 0 20px;
     text-align           : center;
+    color: #37206d;
     border-radius        : 12px;
     -webkit-border-radius: 12px;
     -moz-border-radius   : 12px;
@@ -27,12 +31,18 @@
 }
 
 .btn {
-    margin-bottom   : 7px;
-    background-color: rgb(77, 15, 77);
-    color           : white;
-    font-size       : 1.1em;
-    margin-bottom   : 10px;
-    padding         : 7px 20px;
+    margin-bottom: 7px;
+    /*background-color: rgb(77, 15, 77);
+    */background-color: #411e94;
+    color: white;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    padding: 7px 20px;
+    border-radius:7px ;
+    -webkit-border-radius:7px ;
+    -moz-border-radius:7px ;
+    -ms-border-radius:7px ;
+    -o-border-radius:7px ;
 }
 
 .no_product {
@@ -54,7 +64,6 @@
         width : 45%;
         margin: 5px;
         padding: 0;
-        border:1px solid black;
     }
     .product_title,.product_price,.product_description{
         margin: 5px;

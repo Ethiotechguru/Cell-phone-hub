@@ -1,0 +1,53 @@
+<%- include('./inc/head.ejs') %> 
+<link rel="stylesheet" href="/order.css">
+</head>
+<body>
+    <%- include('./inc/navigation.ejs')%>
+    </header>
+    <% if(orderItems.length>0) {%> 
+    <div class="container">
+        <div class="cart_heading">
+            <h2 >Your Orders</h2>
+            <p>Thank your for Shopping</p>
+        </div>
+        <div class="orders">
+                <% orderItems.forEach(p=>{%> 
+                    <div class="grid">
+                        <div class="ordered_data">
+                            <h2>Order #<%=p.id %> </h2>
+                            <h2><%= p.createdAt %> </h2>
+                        </div>
+                        <% p.products.forEach(item=>{%>
+                            <article class="cart_container">
+                                <div class="cart_detail_container">
+                                    <div class="cart_image">
+                                        <img src=<%=item.imgUrl %> alt="<%=item.title %> ">
+                                    </div>
+                                    
+                                    <div class="cart_content">
+                                        <h3 class="cart_title"><%=item.title %> </h3>
+                                        <p class="cart_description"><%=item.description %> </p>
+                                    </div>
+                                </div>
+                                <div class="cart_form">
+                                    <h3 class="cart_price">
+                                        $<%= item.price %> 
+                                    </h3>
+                                    <div class="card_action">
+                                        <form  action="/cart" method="POST">
+                                            <button class="btn" type="submit">Buy It Again</button>
+                                            <input type="hidden" name ="cartItem" value="<%=item.id%> "/>
+                                        </form>
+                                        <a class="btn_detail" href="/products/<%=item.id%> ">Go To Product</a>
+                                    </div>
+                                </div>
+                            </article>
+                        <%})%> 
+                    </div>
+                <% }) %> 
+        </div>
+    </div>
+    <%}else{%>
+        <h1 class="no_product">You have No Orders</h1>
+    <% } %> 
+    <%-include('./inc/footer.ejs') %> 

@@ -10,6 +10,9 @@
                     <a href="/cart" class="<%= path === '/cart' ? 'active' : '' %> ">
                         <li class="nav_item">Cart</li>
                     </a>
+                    <a href='/orders' class="<%= path === '/orders' ? 'active' : '' %> ">
+                        <li class="nav_item">Orders</li>
+                    </a>
                     <a href="/add-product" class="<%= path=== '/add-product' ? 'active' : '' %> ">
                         <li class="nav_item">Add Product</li>
                     </a>
@@ -31,6 +34,9 @@
                     <a href="/cart" path="blabla">
                         <li class="mobile_nav_item">Cart</li>
                     </a>
+                    <a href='/orders' path="blabla">
+                        <li class="mobile_nav_item">Orders</li>
+                    </a>
                     <a href="/add-product" path="blabla">
                         <li class="mobile_nav_item" >Add Product</li>
                     </a>
@@ -44,5 +50,34 @@
                     <span class="dash"></span>
                     <span class="dash"></span>
                 </div>
+                <div class="mode-gutter">
+                    <div class="mode_btn"></div>
+                </div>
+                <script>
+                    let nightMode = false;
+                    const modeGutter = document.querySelector('.mode-gutter');
+                    let scroller = modeGutter.querySelector('.mode_btn');
+                    let lS = localStorage.getItem('nightMode');
+                    if(lS === 'true'){
+                        scroller.style.left = "28px";
+                        document.body.style.backgroundColor = 'black';
+                        nightMode = true;
+                    }
+                    function changeMode() {
+                        if(!nightMode){
+                            scroller.style.left = "28px";
+                            document.body.style.backgroundColor = 'black';
+                            localStorage.setItem('nightMode', true)
+                            nightMode = true;
+                        }else{
+                            scroller.style.left = "1px";
+                            document.body.style.backgroundColor = 'white';
+                            localStorage.setItem('nightMode', false)
+                            nightMode = false;
+                        }
+                        
+                    }
+                    modeGutter.addEventListener('click', changeMode)
+                </script>
             </nav>
 

@@ -1,0 +1,4 @@
+Hex #DE3D81//Primary
+Hex #3DDE9A//secondary
+Hex #AAF1D3 ///tertiary
+Hex #A68DE2 //tertiary
