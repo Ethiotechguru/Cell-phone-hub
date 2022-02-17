@@ -166,13 +166,17 @@ a.active{
         -ms-border-radius: 10px;
         -o-border-radius: 10px;
     }
+    .mode-gutter {
+        top  : 45px;
+        right: 6px;
+    }
 }
-@media screen and (max-width:600px) {
+/* @media screen and (max-width:600px) {
     .mode-gutter {
         top                  : 45px;
         right                :6px;
     }
-}
+} */
 @media screen and (max-width:500px) {
     .nav {
         display        : block;
@@ -188,5 +192,14 @@ a.active{
     }
     .crusal {
         top             : 10px;
+    }
+}
+@media screen and (max-width:350px) {
+    .mode-gutter {
+        top: 26px;
+    }
+
+    .crusal {
+        top: 6px;
     }
 }

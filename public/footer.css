@@ -38,6 +38,18 @@
     background-color: white;
     color: black;
 }
+.copy_right{
+    display: flex;
+    justify-content: center;
+    /* align-items: flex-end; */
+    color: rgb(170, 168, 168);
+}
+.copy_right h2,.copy_right p,.copy_right h3{
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+    align-self: center;
+}
 @media screen and (max-width:1350px){
     .footer_nav_list {
         width          : 80%;
