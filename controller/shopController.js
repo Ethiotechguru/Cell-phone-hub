@@ -58,7 +58,7 @@ exports.postDeleteCart = (req, res,next)=>{
 		return cart.getProducts({where:{id:itemId}})
 	}).then(products=>{
 		let product = products[0]
-		// console.log(product)
+
 		return product.cartItem.destroy();
 	}).then(result=>{
 		res.redirect("/cart");
@@ -79,7 +79,6 @@ exports.getCart = (req,res,next)=>{
 		})
 		.then((cartItems) => {
 			const subTotal = cartItems.reduce((a, b)=> a+(+b.price * +b.cartItem.quantity),0);
-			console.log(subTotal)
 			res.render("cart.ejs", {
 				cartItems: cartItems,
 				path: "/cart",
@@ -91,7 +90,9 @@ exports.getCart = (req,res,next)=>{
 		})
 }
 exports.postOrders = (req, res, next) => {
+	let fetchedCart;
 	req.user.getCart().then(cart=>{
+		fetchedCart = cart;
 		return cart.getProducts();
 	})
 	.then(products=>{
@@ -102,6 +103,8 @@ exports.postOrders = (req, res, next) => {
 				return product;
 			}));
 		})
+	}).then(prods=>{
+		return fetchedCart.setProducts(null);
 	}).then(results=>{
 		res.redirect("/cart");
 	})
@@ -109,7 +112,6 @@ exports.postOrders = (req, res, next) => {
 exports.getOrder = (req, res, next)=>{
 	req.user.getOrders({include:['products']})
 	.then(orders=>{
-		console.log(orders)
 		res.render("./orders.ejs", {
 			pageTitle: "Orders",
 			path: "/orders",

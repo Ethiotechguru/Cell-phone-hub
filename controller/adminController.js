@@ -1,5 +1,5 @@
 
-const detail =require('../utility/paragraph')
+// const detail =require('../utility/paragraph')
 const Product= require('../models/product')
 const User = require('../models/user')
 const postAddProduct = (req, res, next) => {
