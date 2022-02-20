@@ -8,9 +8,9 @@
         <% if(products.length>0) {%> 
             <% products.forEach(p=>{%> 
                 <article class="card_header">
-                    <a href="/products/<%=p.id %> " class="see_detail"><h3 class="product_title"><%=p.title %> </h3></a>
+                    <a href="/products/<%=p._id %> " class="see_detail"><h3 class="product_title"><%=p.title %> </h3></a>
                     <div class="card_image">
-                        <a href="/products/<%=p.id %> " class="see_detail"><img src=<%=p.imgUrl %> alt="<%=p.title %> "></a>
+                        <a href="/products/<%=p._id %> " class="see_detail"><img src=<%=p.imgUrl %> alt="<%=p.title %> "></a>
                     </div>
                     <div class="card_content">
                         <h4 class="product_price">
@@ -21,9 +21,9 @@
                     <div class="card_action">
                         <form  action="/cart" method="POST">
                             <button class="btn" type="submit">Add To Cart</button>
-                            <input type="hidden" name ="cartItem" value="<%=p.id%> "/>
+                            <input type="hidden" name ="cartItem" value="<%=p._id%> "/>
                         </form>
-                        <a class="btn_detail" href="/products/<%=p.id%> ">Detail</a>
+                        <a class="btn_detail" href="/products/<%=p._id%> ">Detail</a>
                     </div>
                 </article>
             <% }) %> 

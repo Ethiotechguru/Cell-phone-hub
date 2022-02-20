@@ -21,9 +21,9 @@
                     <div class="card_action">
                         <form  action="/delete-admin-product" method="POST" class="card_action">
                             <button class="btn" type="submit">Delete</button>
-                            <input type="hidden" name ="cartItem" value="<%=p.id%> "/>
+                            <input type="hidden" name ="cartItem" value="<%=p._id%> "/>
                         </form>
-                        <a class="btn_detail" href="/edit-product/<%=p.id%>/?edit=<%=true%>  ">Edit</a>
+                        <a class="btn_detail" href="/edit-product/<%=p._id%>/?edit=<%=true%>  ">Edit</a>
                     </div>
                 </article>
             <% }) %> 

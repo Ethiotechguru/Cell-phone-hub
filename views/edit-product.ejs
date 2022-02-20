@@ -17,7 +17,7 @@
                 <input type="text" name="desc" value="<% if(editMode) {%><%=product.description%> <% } %>">
                 <label for="imgUrl">Image Url</label>
                 <input type="text" name="imgUrl" value="<% if(editMode) {%><%=product.imgUrl%> <% } %>">
-                <% if(editMode) {%><input type="hidden" value="<%=product.id%>" name="prodId"><% } %> 
+                <% if(editMode) {%><input type="hidden" value="<%=product._id%>" name="prodId"><% } %> 
                 <button type="submit"><%if(editMode){%>Update<%}else{%>Add Product<% } %> </button>
             </div>
         </form>

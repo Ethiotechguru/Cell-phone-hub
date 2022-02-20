@@ -11,13 +11,8 @@
             <p>Thank your for Shopping</p>
         </div>
         <div class="orders">
-                <% orderItems.forEach(p=>{%> 
+                <% orderItems.forEach(item=>{%> 
                     <div class="grid">
-                        <div class="ordered_data">
-                            <h2>Order #<%=p.id %> </h2>
-                            <h2><%= p.createdAt %> </h2>
-                        </div>
-                        <% p.products.forEach(item=>{%>
                             <article class="cart_container">
                                 <div class="cart_detail_container">
                                     <div class="cart_image">
@@ -36,13 +31,12 @@
                                     <div class="card_action">
                                         <form  action="/cart" method="POST">
                                             <button class="btn" type="submit">Buy It Again</button>
-                                            <input type="hidden" name ="cartItem" value="<%=item.id%> "/>
+                                            <input type="hidden" name ="cartItem" value="<%=item._id%> "/>
                                         </form>
-                                        <a class="btn_detail" href="/products/<%=item.id%> ">Go To Product</a>
+                                        <a class="btn_detail" href="/products/<%=item._id%> ">Go To Product</a>
                                     </div>
                                 </div>
                             </article>
-                        <%})%> 
                     </div>
                 <% }) %> 
         </div>
