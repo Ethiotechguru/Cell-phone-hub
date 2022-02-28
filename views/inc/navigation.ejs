@@ -53,35 +53,6 @@
                 <div class="mode-gutter">
                     <div class="mode_btn"></div>
                 </div>
-                <script>
-                    let nightMode = false;
-                    const modeGutter = document.querySelector('.mode-gutter');
-                    let scroller = modeGutter.querySelector('.mode_btn');
-                    let lS = localStorage.getItem('nightMode');
-                    modeGutter.style.border = '1px solid white';
-                    if(lS === 'true'){
-                        scroller.style.left = "28px";
-                        document.body.style.backgroundColor = 'black';
-                        modeGutter.style.backgroundColor = "#000";
-                        nightMode = true;
-                    }
-                    function changeMode() {
-                        if(!nightMode){
-                            scroller.style.left = "28px";
-                            document.body.style.backgroundColor = 'black';
-                            modeGutter.style.backgroundColor = "#000";
-                            localStorage.setItem('nightMode', true)
-                            nightMode = true;
-                        }else{
-                            scroller.style.left = "1px";
-                            document.body.style.backgroundColor = 'white';
-                            modeGutter.style.backgroundColor = "#fff";
-                            localStorage.setItem('nightMode', false)
-                            nightMode = false;
-                        }
-                        
-                    }
-                    modeGutter.addEventListener('click', changeMode)
-                </script>
+                
             </nav>
 

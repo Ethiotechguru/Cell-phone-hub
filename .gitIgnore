@@ -3,6 +3,7 @@ data/
 data/carts.json
 data/products.json
 utility/
+myAmz.js
 index.txt
 .env
 # Compiled source #

@@ -1,4 +1,4 @@
-const req = require('express/lib/request');
+const { Timestamp } = require('mongodb');
 
 const getDb = require('../db/mongBase').getDb;
 class User{
@@ -34,8 +34,7 @@ class User{
         });
         if ((prodIndex || prodIndex===0) && prodIndex !== -1) {
 			updatedCart = [...this.cart.items];
-			updatedCart[prodIndex].quantity =
-				updatedCart[prodIndex].quantity + 1;
+			updatedCart[prodIndex].quantity++;
 		} else {
 			updatedCart = [...this.cart.items, prod];
 		}
@@ -45,26 +44,25 @@ class User{
 			{ $set: { cart: {items:updatedCart} } }
 		);
     }
+    deleteCartItem(prodId){
+        const updatedCartItems = this.cart.items.filter(
+			(item) => item.prodId.toString() !== prodId.toString()
+		);
+        const db = getDb();
+        return db.collection("users").updateOne(
+			{ _id: this._id },
+			{ $set: { cart: { items: updatedCartItems } } }
+		);
+    }
     checkOut(){
         const db = getDb();
         return db
-			.collection("users")
-			.updateOne(
-				{ _id: this._id },
-				{
-					$set: {
-						order: {
-							orderItems: [
-								...this.cart.items,
-								...this.order.orderItems,
-							],
-						},
-						cart: { items: [] },
-					},
-				}
-			)
-			.then((user) => {
-				return user;
+			.collection("orders")
+			.insertOne({userId:this._id, orderItems:this.cart, date:Date.now()})
+			.then((order) => {
+                
+				this.cart = {items:[]};
+                return db.collection('users').updateOne({_id:this._id}, {$set:{cart:{items:[]}}})
 			})
 			.catch((err) => {
 				console.log(err);
@@ -72,9 +70,13 @@ class User{
     }
     getOrders(){
         const db = getDb();
-        return  db.collection('users').findOne({_id:this._id})
-        .then(user=>{
-            return user;
+        return db.collection('orders').find().toArray()
+        .then(orders=>{
+            const newOrder = []
+            orders.forEach(order=>{
+                newOrder.push({timeStamp:order.date, items:order.orderItems.items, id:order._id});
+            })
+            return newOrder;
         }).catch(err=>{
             console.log(err)
         })

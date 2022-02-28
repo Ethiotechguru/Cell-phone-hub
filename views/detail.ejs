@@ -22,13 +22,34 @@
                         <button class="btn" type="submit">Add To Cart</button>
                         <input type="hidden" name ="cartItem" value="<%=product._id%> "/>
                     </form>
-                    <!-- <div class="card_action">
-                        <button class="btn" id="<%=product._id%> ">Add To Cart</button>
-                    </div> -->
                 </article>
             </div>
             <p class="detail_par"><%=product.detail%> </p>
+            <%if(product.images.length>0) {%>
+            <div class="extraImageContainer">
+                <%product.images.forEach(ele=>{%>
+                    <img src="<%=ele%>" alt="<%=product.title%>"/>
+                <% }) %> 
+            </div>
+        <% } %> 
         </div>
+        <script>
+            let imgContainer = document.querySelector('.extraImageContainer');
+            if(imgContainer){
+                let img = imgContainer.querySelectorAll('img');
+                imgContainer.addEventListener('click',(e)=>{
+                    img.forEach(ele=>{
+                        ele.className = '';
+                    })
+                    if(e.target.nodeName === 'IMG'){
+                        e.target.className = 'selectedImage';
+                        let eleToBeUpdated = document.querySelector('.card_image');
+                        eleToBeUpdated.innerHTML =`<img src=${e.target.src} alt=${e.target.alt}/>`;
+                    }
+                
+                })
+            }
+        </script>
     <%-include('./inc/footer.ejs') %> 
 
 
