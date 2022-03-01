@@ -1,5 +1,4 @@
 .container {
-    /* background-color: rgb(255, 255, 255); */
     width           : 100%;
     max-width       : 1500px;
     margin          : 0 auto;
@@ -53,7 +52,6 @@
 }
 
 .cart_price {
-    /* color: rgb(177, 39, 4); */
     color: #37206d;
 }
 
@@ -111,6 +109,7 @@
 @media screen and (max-width:620px) {
     .cart_container {
         flex-direction: column;
+        border-bottom: 1px solid #37206d;
     }
 
     .cart_content {

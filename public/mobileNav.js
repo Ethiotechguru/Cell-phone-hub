@@ -54,6 +54,3 @@
 	modeGutter.addEventListener("click", changeMode);
 })()
 
-// window.addEventListener("load", ()=>{
-// 	console.log(window.innerWidth)
-// });

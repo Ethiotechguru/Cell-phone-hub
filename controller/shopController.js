@@ -1,10 +1,10 @@
-const { getDb } = require('../db/mongBase');
 const Product = require('../models/product');
 const ObjectId = require('mongodb').ObjectId;
-const User = require('../models/user');
+const Order = require('../models/order');
+
 
 exports.getShopController = (req, res, next) => {
-	Product.fetchAll().then((products) => {
+	Product.find().then((products) => {
 		res.render("./shop.ejs", {
 			products: products,
 			pageTitle: "Shop",
@@ -30,20 +30,18 @@ exports.getProductDetail = (req, res, next) => {
 exports.postCartController = (req,res,next)=>{
 	const prodId = req.body.cartItem.trim();
 	const id = new ObjectId(prodId)
-	const db = getDb();
-	db.collection("products")
-		.findOne({ _id: id })
-		.then(product=>{
-			req.user.addToCart(product)
+	Product.findById(id)
+		.then((product) => {
+			return req.user.addToCart(product)
 		})
 		.then((cart) => {
-			res.redirect("/cart");
+			res.redirect("/");
 		})
 		.catch((err) => console.log(err));
 }
 exports.postDeleteCart = (req, res,next)=>{
 	const itemId = req.body.deleteCartItem;
-	req.user.deleteCartItem(itemId)
+	return req.user.deleteCartItem(itemId)
 	.then((result) => {
 		res.redirect('/cart')
 	}).catch(err=>{
@@ -51,41 +49,58 @@ exports.postDeleteCart = (req, res,next)=>{
 	})
 }
 exports.getCart = (req,res,next)=>{
-	const userId = req.user._id
-		User.findById(userId)
-			.then((user) => {
-				return user.cart.items;
-			})
-			.then((cartItems) => {
-				const subTotal = cartItems.reduce((a, b) => {
-					return a + +b.price * b.quantity;
-				}, 0);
-
-				res.render("cart.ejs", {
-					cartItems: cartItems,
-					path: "/cart",
-					pageTitle: "Cart",
-					subTotal: subTotal.toFixed(2),
+			req.user.populate("cart.items.productId")
+				.then((user) => {
+					return user.cart.items;
+				})
+				.then((cartItems) => {
+					let subTotal = 0;
+					if (cartItems.length > 0) {
+						subTotal = cartItems.reduce((a, b) => {
+							return a + +b.productId.price * b.quantity;
+						}, 0);
+					}
+					res.render("cart.ejs", {
+						cartItems: cartItems,
+						path: "/cart",
+						pageTitle: "Cart",
+						subTotal: subTotal.toFixed(2),
+					});
+				})
+				.catch((err) => {
+					console.log(err);
 				});
-			})
-			.catch((err) => {
-				console.log(err);
-			});
 }
 exports.postOrders = (req, res, next) => {
-	req.user.checkOut()
-	.then(()=>{
-		res.redirect("/orders");
-	}).catch(err=>{
-		console.log(err)
-	})
-}
-
+	return req.user
+		.populate("cart.items.productId")
+		.then((user) => {
+			const products = user.cart.items.map(item=>{
+				return {product:{...item.productId._doc}, quantity:item.quantity}
+			})
+			const order = new Order({
+				products: products,
+				timeStamp:Date.now(),
+				user: {
+					name: req.user.name,
+					userId: req.user,
+				},
+			});
+			req.user.cart = {items:[]}
+			req.user.save();
+			return order.save()
+		})
+		.then((result) => {
+			console.log(result,'is result')
+			res.redirect("/");
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+} 
 exports.getOrder = (req, res, next)=>{
-	req.user
-		.getOrders()
+		Order.find()
 		.then(orders=>{
-			console.log(orders)
 			return orders
 		})
 		.then(orderItems => {
@@ -98,10 +113,9 @@ exports.getOrder = (req, res, next)=>{
 		.catch((err) => {
 			console.log(err);
 		});
-	
 }
 exports.allProducts = (req,res,next)=>{
-	Product.fetchAll().then(prods=>{
+	Product.find().then(prods=>{
 		res.render("./products.ejs", {
 			pageTitle: "Products",
 			path: "/products",

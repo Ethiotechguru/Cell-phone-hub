@@ -1,11 +1,7 @@
 .footer{
     width: 100%;
-    /* margin: 0; */
     height: 12vh;
     background-color: #2d116e;;
-    /* position: absolute; */
-    /* bottom: 0; */
-   
     display: flex;
     justify-content: space-between;
     padding: 0 40px;
@@ -41,7 +37,6 @@
 .copy_right{
     display: flex;
     justify-content: center;
-    /* align-items: flex-end; */
     color: rgb(170, 168, 168);
 }
 .copy_right h2,.copy_right p,.copy_right h3{

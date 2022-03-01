@@ -1,5 +1,4 @@
 .container{
-    /* background-color: rgb(255, 255, 255); */
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
@@ -86,7 +85,6 @@
     text-align: right;
     width: 90%;
     margin: 10px auto;
-    /* background-color: red; */
 }
 .checkout_btn_container button{
     padding: 6px 10px;

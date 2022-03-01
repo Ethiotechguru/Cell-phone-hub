@@ -5,49 +5,48 @@
     <%- include('./inc/navigation.ejs')%>
     </header>
     <% if(orderItems.length>0) {%> 
-    <div class="container">
-        <div class="cart_heading">
-            <h2 >Your Orders</h2>
-            <p>Thank your for Shopping</p>
-        </div>
-        <div class="orders">
-            <% orderItems.forEach(items=>{%> 
-                <div class="grid">
-                    <div class="orderInfo">
-                        <h3>Order# <%=items.timeStamp %> </h3>
-                        <h3>Ordered Date: <%= new Date(items.timeStamp).toDateString() %></h3>
+        <div class="container">
+            <div class="cart_heading">
+                <h2 >Your Orders</h2>
+                <p>Thank your for Shopping</p>
+            </div>
+            <div class="orders">
+                <% orderItems.forEach(items=>{%> 
+                    <div class="grid">
+                        <div class="orderInfo">
+                            <h3>Order# <%=items.timeStamp %> </h3>
+                            <h3>Ordered Date: <%= new Date(items.timeStamp).toDateString() %></h3>
+                        </div>
+                        <% items.products.forEach(item=>{%> 
+                                <article class="cart_container">
+                                    <div class="cart_detail_container">
+                                        <div class="cart_image">
+                                            <img src=<%=item.product.imgUrl %> alt="<%=item.product.title %> ">
+                                        </div>
+                                        
+                                        <div class="cart_content">
+                                            <h3 class="cart_title"><%=item.product.title %> </h3>
+                                            <p class="cart_description"><%=item.product.description %> </p>
+                                        </div>
+                                    </div>
+                                    <div class="cart_form">
+                                        <h3 class="cart_price">
+                                            $<%= item.product.price %> 
+                                        </h3>
+                                        <div class="card_action">
+                                            <form  action="/cart" method="POST">
+                                                <button class="btn" type="submit">Buy It Again</button>
+                                                <input type="hidden" name ="cartItem" value="<%=item.product._id%> "/>
+                                            </form>
+                                            <a class="btn_detail" href="/products/<%=item.product._id%> ">Go To Product</a>
+                                        </div>
+                                    </div>
+                                </article>
+                        <% }) %> 
                     </div>
-                    
-                    <% items.items.forEach(item=>{%> 
-                        <article class="cart_container">
-                            <div class="cart_detail_container">
-                                <div class="cart_image">
-                                    <img src=<%=item.imgUrl %> alt="<%=item.title %> ">
-                                </div>
-                                
-                                <div class="cart_content">
-                                    <h3 class="cart_title"><%=item.title %> </h3>
-                                    <p class="cart_description"><%=item.description %> </p>
-                                </div>
-                            </div>
-                            <div class="cart_form">
-                                <h3 class="cart_price">
-                                    $<%= item.price %> 
-                                </h3>
-                                <div class="card_action">
-                                    <form  action="/cart" method="POST">
-                                        <button class="btn" type="submit">Buy It Again</button>
-                                        <input type="hidden" name ="cartItem" value="<%=item.prodId%> "/>
-                                    </form>
-                                    <a class="btn_detail" href="/products/<%=item.prodId%> ">Go To Product</a>
-                                </div>
-                            </div>
-                        </article>
-                    <% }) %> 
-                </div>
-            <% }) %>
+                <% }) %>
+            </div>
         </div>
-    </div>
     <%}else{%>
         <h1 class="no_product">You have No Orders</h1>
     <% } %> 

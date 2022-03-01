@@ -4,10 +4,16 @@ const Product= require('../models/product')
 // const User = require('../models/user')
 const postAddProduct = (req, res, next) => {
 	const {title,price,desc,imgUrl} = req.body;
-	const userId = req.user._id;
-	let product = new Product(title, price, desc, imgUrl, userId);
+	let product = new Product({
+		title: title,
+		price: price,
+		description: desc,
+		imgUrl: imgUrl,
+		userId: req.user,
+		images: [],
+	});
 	product.save()
-	res.redirect("/admin-product");
+	res.redirect("/add-product");
 };
 
 const getAddProduct = (req, res, next) => {
@@ -22,8 +28,15 @@ const postEditProduct = (req, res, next) => {
 	const id = req.body.prodId.trim();
 	let prodId = new ObjectId(id)
 	const { title, price, desc,imgUrl} = req.body;
-	Product.updateProduct(prodId, title, price, desc, imgUrl)
-		.then(() => {
+	Product.findById(prodId)
+		.then(product=>{
+			product.title = title;
+			product.price = price;
+			product.description = desc;
+			product.imgUrl = imgUrl;
+			return product.save()
+		})
+		.then((product) => {
 			res.redirect("/");
 		})
 		.catch((err) => {
@@ -48,7 +61,7 @@ const getEditProduct = (req, res, next) => {
 const postDeleteProduct = (req, res, next)=>{
 	const id = req.body.cartItem.trim();
 	const prodId = new ObjectId(id)
-	Product.deleteById(prodId)
+	Product.findByIdAndDelete(prodId)
 		.then((products) => {
 			res.redirect("/admin-product");
 		})
@@ -58,7 +71,7 @@ const postDeleteProduct = (req, res, next)=>{
 }
 
 const getAdminProducts = (req, res, next)=>{
-	Product.fetchAll().then((products) =>{
+	Product.find().then((products) =>{
 		res.render("adminProducts.ejs", {
 			products: products,
 			pageTitle: "Admin Products",

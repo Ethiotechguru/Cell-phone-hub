@@ -1,11 +1,15 @@
 html,body,ul{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial,sans-serif;
+    font-weight: 300;
+    background-color: rgb(255, 255, 255);
 }
 .header {
-    /* background-color: rgb(167, 122, 8); */
     background-color: #411e94;
-    /* color           : rgb(150, 144, 144); */
     height: 12vh;
     margin: 0;
     width: 100%;
@@ -39,10 +43,7 @@ html,body,ul{
     width           : 140px;
     text-decoration : none;
 }
-body{
-    background-color: rgb(255, 255, 255);
-    /* background-color: black; */
-}
+
 a.active{
     background-color: #A68DE2;
     color: black;
@@ -171,12 +172,7 @@ a.active{
         right: 6px;
     }
 }
-/* @media screen and (max-width:600px) {
-    .mode-gutter {
-        top                  : 45px;
-        right                :6px;
-    }
-} */
+
 @media screen and (max-width:500px) {
     .nav {
         display        : block;
