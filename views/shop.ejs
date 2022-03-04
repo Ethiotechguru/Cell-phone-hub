@@ -4,6 +4,16 @@
 <body>
     <%- include('./inc/navigation.ejs')%>
     </header>
+    <% if(products.length>0) {%> 
+        <div class="slider_container">
+        <% products.forEach(p=>{%>
+            <div class="imageSlider">
+                <img src="<%=p.imgUrl %> " alt="<% p.title %> ">
+            </div>
+        <%}) %> 
+        </div>
+    <% } %> 
+    
     <div class="grid">
         <% if(products.length>0) {%> 
             <% products.forEach(p=>{%> 
@@ -31,6 +41,28 @@
             <h1 class="no_product">Product Not Found</h1>
         <% } %> 
     </div>
+    <script>
+        (function () {
+            let a = document.querySelector('.slider_container');
+            let resetPoint = 0;
+            setInterval(() => {
+                if(resetPoint<a.scrollWidth-1000){
+                    a.scrollBy({
+                        left:a.scrollWidth/6,
+                        behavior: 'smooth'
+                    });
+                    resetPoint = resetPoint + a.scrollWidth/4;
+                    console.log(a.scrollWidth/6)
+                }else{
+                    a.scrollTo({
+                        left:0,
+                        behavior: 'smooth'
+                    });
+                    resetPoint = 0;
+                }
+            },5000)
+        }())
+    </script>
     <%-include('./inc/footer.ejs') %> 
 
 

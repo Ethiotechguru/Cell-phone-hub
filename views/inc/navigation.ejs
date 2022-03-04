@@ -10,16 +10,35 @@
                     <a href="/cart" class="<%= path === '/cart' ? 'active' : '' %> ">
                         <li class="nav_item">Cart</li>
                     </a>
-                    <a href='/orders' class="<%= path === '/orders' ? 'active' : '' %> ">
-                        <li class="nav_item">Orders</li>
-                    </a>
-                    <a href="/add-product" class="<%= path=== '/add-product' ? 'active' : '' %> ">
-                        <li class="nav_item">Add Product</li>
-                    </a>
-                    <a href="/admin-product" class="<%= path=== '/admin-product' ? 'active' : '' %> ">
-                        <li class="nav_item">Admin</li>
-                    </a>
+                    <% if(isAuthenticated) {%>
+                        <a href='/orders' class="<%= path === '/orders' ? 'active' : '' %> ">
+                            <li class="nav_item">Orders</li>
+                        </a>
+                        <a href="/add-product" class="<%= path=== '/add-product' ? 'active' : '' %> ">
+                            <li class="nav_item">Add Product</li>
+                        </a>
+                        <a href="/admin-product" class="<%= path=== '/admin-product' ? 'active' : '' %> ">
+                            <li class="nav_item">Admin</li>
+                        </a>
+                        <!-- <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
+                            <li class="nav_item">Logout</li>
+                        </a> -->
+                         <!-- <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> "> -->
+                            <form  class="<%= path=== '/login' ? 'active' : '' %> " action="/logout" method="POST">
+                                <button class="nav_item"  type="submit">Logout</button>
+                            </form>
+                            <!-- <li class="nav_item">Logout</li> -->
+                        <!-- </a> -->
+                    <% }else{%>
+                        <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
+                            <li class="nav_item">Login</li>
+                        </a>
+                    <% } %> 
                 </ul>
+                <div class="venderLink-container">
+                    <a href="#" class="venderLink">Become a Vender</a>
+                </div>
+                
                 <div class="search_box">
                     <input type="search" placeholder="Search">
                 </div>
@@ -34,14 +53,29 @@
                     <a href="/cart" path="blabla">
                         <li class="mobile_nav_item">Cart</li>
                     </a>
-                    <a href='/orders' path="blabla">
-                        <li class="mobile_nav_item">Orders</li>
-                    </a>
-                    <a href="/add-product" path="blabla">
-                        <li class="mobile_nav_item" >Add Product</li>
-                    </a>
-                    <a href="/admin-product" path= '/bla'>
-                        <li class="mobile_nav_item">Admin Product</li>
+                    <% if(isAuthenticated) {%>
+                        <a href='/orders' path="blabla">
+                            <li class="mobile_nav_item">Orders</li>
+                        </a>
+                        <a href="/add-product" path="blabla">
+                            <li class="mobile_nav_item" >Add Product</li>
+                        </a>
+                        <a href="/admin-product" path= '/bla'>
+                            <li class="mobile_nav_item">Admin Product</li>
+                        </a>
+                        <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
+                            <form class="nav_item" action="/logout" method="POST">
+                                <button type="submit">Logout</button>
+                            </form>
+                            <!-- <li class="nav_item">Logout</li> -->
+                        </a>
+                    <% }else{%>
+                        <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
+                            <li class="nav_item">Login</li>
+                        </a>
+                    <% } %>
+                    <a href="#" class="<%= path=== '/login' ? 'active' : '' %> ">
+                            <li class="nav_item">Venders</li>
                     </a>
                 </ul>
                 <div class="crusal">
@@ -53,6 +87,5 @@
                 <div class="mode-gutter">
                     <div class="mode_btn"></div>
                 </div>
-                
             </nav>
 

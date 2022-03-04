@@ -1,0 +1,19 @@
+    <link rel="stylesheet" href="/form.css">
+    <%-include('../inc/head.ejs')%>  
+</head>
+<body>
+    <%-include('../inc/navigation.ejs')%>
+    </header>
+    <div>
+        <form action="/login" class="form" method="POST">
+            <h1>Log In</h1>
+            <div class="form_control">
+                <label for="email">Email</label>
+                <input type="email" name="email">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+                <button type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+    <%-include('../inc/footer.ejs') %> 

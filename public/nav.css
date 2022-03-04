@@ -24,26 +24,38 @@ body{
     list-style     : none;
     display        : flex;
     justify-content: center;
+    align-items: center;
     padding        : 10px;
     width          : 60%;
 }
-.nav-list a:visited:hover {
+.nav-list a:hover,.nav-list button:hover {
     color           : black;
     background-color: #A68DE2;
 }
-.nav-list a {
+.nav-list form{
+    display: inline-block;
+    margin-bottom: 0;
+}
+.nav-list a,.nav-list button {
     background-color: #300f7e;
-    margin          : 10px;
-    padding         : 10px 7px;
-    font-size: 1.2em;
+    margin-left: 10px;
+    padding: 10px 4px;
+    font-size: 0.8em;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    border-radius   : 15px;
-    color           : rgba(255, 255, 255, 0.568);
-    width           : 140px;
-    text-decoration : none;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.568);
+    width: 140px;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
 }
-
+.nav-list button{
+    outline: none;
+    border: none;
+}
 a.active{
     background-color: #A68DE2;
     color: black;
@@ -137,8 +149,19 @@ a.active{
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+.venderLink-container{
+    
+    margin-top: 60px;
+}
+.venderLink-container a{
+    color: white;
+    text-decoration: none;
+}
 @media screen and (max-width:900px) {
     .nav-list{
+        display: none;
+    }
+    .venderLink-container{
         display: none;
     }
     .crusal{
@@ -179,6 +202,12 @@ a.active{
         justify-content: center;
         align-items    : center;
         height         : 100%;
+    }
+    .venderLink-container{
+        text-align: center;
+        padding-top: 10px;
+        margin-top: 0;
+        display: block;
     }
 }
 

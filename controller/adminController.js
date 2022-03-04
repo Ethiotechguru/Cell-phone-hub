@@ -17,10 +17,12 @@ const postAddProduct = (req, res, next) => {
 };
 
 const getAddProduct = (req, res, next) => {
+	const isLoggedIn = req.session.isLoggedIn;
 	res.render("edit-product.ejs", {
 		pageTitle: "Add Product",
 		path: "/add-product",
 		editMode: false,
+		isAuthenticated: isLoggedIn,
 	});
 };
 
@@ -49,11 +51,13 @@ const getEditProduct = (req, res, next) => {
 	let prodId = new ObjectId(id);
 	let editing = req.query.edit;
 	Product.findById(prodId).then((product) => {
+		const isLoggedIn = req.session.isLoggedIn;
 		res.render("edit-product.ejs", {
 			pageTitle: "Add Product",
 			path: "/add-product",
 			editMode: editing,
 			product: product,
+			isAuthenticated: isLoggedIn,
 		});
 	});
 };
@@ -70,12 +74,15 @@ const postDeleteProduct = (req, res, next)=>{
 		});
 }
 
+
 const getAdminProducts = (req, res, next)=>{
 	Product.find().then((products) =>{
+		const isLoggedIn = req.session.isLoggedIn;
 		res.render("adminProducts.ejs", {
 			products: products,
 			pageTitle: "Admin Products",
 			path: "/admin-product",
+			isAuthenticated: isLoggedIn,
 		});
 	}).catch(err=>{
 		console.log(err)
