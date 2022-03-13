@@ -11,6 +11,8 @@ exports.getShopController = (req, res, next) => {
 			pageTitle: "Shop",
 			path: "/shop",
 			isAuthenticated: isLoggedIn,
+			user:req.session.user,
+			csrfToken:req.csrfToken(),
 		});
 	});
 };
@@ -26,18 +28,31 @@ exports.getProductDetail = (req, res, next) => {
 				pageTitle: product.title,
 				path: "/products",
 				isAuthenticated: isLoggedIn,
+				user: req.session.user,
 			});
 		})
 		.catch((err) => console.log(err));
 };
 exports.postCartController = (req,res,next)=>{
 	const prodId = req.body.cartItem.trim();
-
-	if(!req.session.user){
-		return res.redirect('/')
-	}
-	const id = new ObjectId(prodId)
-
+	const id = new ObjectId(prodId);
+	// let curProdId = { prodId:prodId, quantity: 1 };;
+	// console.log(curProdId)
+	// curProdId = JSON.stringify(curProdId);
+	// console.log(curProdId)
+	// let prodIds = [curProdId];
+	// prodIds = prodIds.toString();
+	// if (!req.session.user) {
+		// const { cookies } = req;
+		// console.log(cookies.prodIds.split(','));
+		// prodIds.push(cookies.prodIds);
+		// if (cookies.prodIds){
+		// 	prodIds.push(cookies.prodIds)
+		// }
+		// console.log(cookies.prodIds);
+		// res.setHeader("Set-Cookie", `prodIds=${prodIds}`);
+		// return res.redirect("/login");
+	// }
 	Product.findById(id)
 		.then((product) => {
 			req.user.addToCart(product);
@@ -48,7 +63,7 @@ exports.postCartController = (req,res,next)=>{
 		.catch((err) => console.log(err));
 }
 exports.postDeleteCart = (req, res,next)=>{
-
+	
 	const itemId = req.body.deleteCartItem;
 	return req.user.deleteCartItem(itemId)
 	.then((result) => {
@@ -58,9 +73,35 @@ exports.postDeleteCart = (req, res,next)=>{
 	})
 }
 exports.getCart = (req,res,next)=>{
-			if(!req.user){
-				return res.redirect('/')
-			}
+			// if(!req.session.isLoggedIn){
+				// const { cookies } = req;
+				// console.log(cookies.prodIds.split(','));
+				// console.log(JSON.parse(cookies.prodIds.split(",")));
+				// let guestCartProdIds = [];
+				// if (cookies.prodIds) {
+				// 	let p = cookies.prodIds.split(",")
+				// 	console.log(JSON.parse(cookies.prodIds.split(',')))
+				// 	// guestCartProdIds = p.map(e=>{
+				// 	// 	return JSON.parse(e)
+				// 	// });
+				// }
+				// console.log(guestCartProdIds);
+				// return res.redirect("/login");
+				// return Product.find({_id:{$in:guestCartProdIds}})
+				// .then(products=>{
+				// 	let subTotal = products.reduce((a, b)=>a+b.price, 0)
+				// 	res.render("guestCheckOut.ejs", {
+				// 		cartItems: products,
+				// 		pageTitle: "Guest Checkout",
+				// 		path: "/cart",
+				// 		subTotal: subTotal.toFixed(2),
+				// 		isAuthenticated: false,
+				// 		user: req.session.user,
+				// 	});
+				// }).catch(err=>{
+				// 	console.log(err)
+				// })
+			// }
 			return req.user.populate("cart.items.productId")
 				.then((user) => {
 					return user.cart.items;
@@ -75,10 +116,11 @@ exports.getCart = (req,res,next)=>{
 					const isLoggedIn = req.session.isLoggedIn;
 					res.render("cart.ejs", {
 						cartItems: cartItems,
-						path: "/cart",
 						pageTitle: "Cart",
+						path: "/cart",
 						subTotal: subTotal.toFixed(2),
 						isAuthenticated: isLoggedIn,
+						user: req.session.user,
 					});
 				})
 				.catch((err) => {
@@ -86,10 +128,6 @@ exports.getCart = (req,res,next)=>{
 				});
 }
 exports.postOrders = (req, res, next) => {
-	if(!req.session.isLoggedIn){
-		res.redirect('/login')
-		return;
-	}
 	return req.user
 		.populate("cart.items.productId")
 		.then((user) => {
@@ -100,7 +138,7 @@ exports.postOrders = (req, res, next) => {
 				products: products,
 				timeStamp:Date.now(),
 				user: {
-					name: req.user.name,
+					email: req.user.email,
 					userId: req.user,
 				},
 			});
@@ -116,7 +154,7 @@ exports.postOrders = (req, res, next) => {
 		})
 } 
 exports.getOrder = (req, res, next)=>{
-		Order.find()
+		Order.find({'user.userId':req.session.user._id})
 		.then(orders=>{
 			return orders
 		})
@@ -127,6 +165,7 @@ exports.getOrder = (req, res, next)=>{
 				path: "/orders",
 				orderItems: orderItems,
 				isAuthenticated: isLoggedIn,
+				user: req.session.user,
 			});
 		})
 		.catch((err) => {
@@ -141,6 +180,7 @@ exports.allProducts = (req,res,next)=>{
 			path: "/products",
 			products: prods,
 			isAuthenticated: isLoggedIn,
+			user: req.session.user,
 		});
 	}).catch(err=>{
 		console.log(err)

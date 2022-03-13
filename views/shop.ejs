@@ -26,7 +26,11 @@
                         <h4 class="product_price">
                             $<%= p.price %> 
                         </h4>
-                        <p class="product_description"><%=p.description %> </p>
+                        <% if(p.description.length>40){%> 
+                            <p class="product_description"><a class="see_detail" href="/products/<%=p._id %>"><%=p.description.substring(0,30)%>...</a> </p>
+                        <% }else{ %>
+                            <p class="product_description"><a class="see_detail" href="/products/<%=p._id %>"><%=p.description%></a></p>
+                        <% } %> 
                     </div>
                     <div class="card_action">
                         <form  action="/cart" method="POST">
@@ -44,9 +48,16 @@
     <script>
         (function () {
             let a = document.querySelector('.slider_container');
+            console.log(a)
             let resetPoint = 0;
             setInterval(() => {
-                if(resetPoint<a.scrollWidth-1000){
+                if(a.clientWidth<800){
+                    a.scrollBy({
+                        left:400,
+                        behavior: 'smooth'
+                    });
+                }
+                if(resetPoint<=a.scrollWidth){
                     a.scrollBy({
                         left:a.scrollWidth/6,
                         behavior: 'smooth'

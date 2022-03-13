@@ -1,0 +1,50 @@
+<%- include('./inc/head.ejs') %> 
+<link rel="stylesheet" href="/cart.css">
+</head>
+<body>
+    <%- include('./inc/navigation.ejs')%>
+    </header>
+    <% if(cartItems.length>0) {%> 
+    <div class="container">
+        <div class="cart_heading">
+            <h2 >Your Cart</h2>
+            <p>Enjoy Shopping</p>
+        </div>
+        <div class="grid">
+                <% cartItems.forEach(p=>{%> 
+                    <article class="cart_container">
+                        <div class="cart_detail_container">
+                            <div class="cart_image">
+                                <img src=<%=p.imgUrl %> alt="<%=p.title %> ">
+                            </div>
+                            
+                            <div class="cart_content">
+                                <h3 class="cart_title"><%=p.title %> </h3>
+                                <p class="cart_description"><%=p.description %> </p>
+                                <input class="quntitiy" type="number" value=<%=p.quantity%> id=<%=p._id %>  />
+                            </div>
+                        </div>
+                        <div class="cart_form">
+                            <h3 class="cart_price">
+                                $<%= (+p.price  ) %>
+                            </h3>
+                            <form action="/delete-cart" method="POST">
+                                <button class="btn" type="submit">Delete</button>
+                                <input type="hidden"  value="<%=p._id%>" name="deleteCartItem">
+                            </form>
+                        </div>
+                    </article>
+                <% }) %> 
+                <div class="sub_total">
+                    <h2>Sub Total</h2>
+                    <h2>$<%=subTotal %> </h2>
+                </div>
+        </div>
+        <form class="checkout_btn_container" action="/create-order" method="POST">
+            <button>Check Out</button>
+        </form>
+    </div>
+    <%}else{%>
+        <h1 class="no_product">Your Cart is Empty</h1>
+    <% } %> 
+    <%-include('./inc/footer.ejs') %> 

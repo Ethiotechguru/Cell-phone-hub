@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	name: {
+	email: {
 		type: String,
 		required: true,
 	},
-	email: {
+	password: {
 		type: String,
 		required: true,
 	},
@@ -26,7 +26,7 @@ const userSchema = new Schema({
 				quantity: { type: Number, required: true },
 			},
 		],
-	}
+	},
 });
 
 userSchema.methods.addToCart = function (product) {

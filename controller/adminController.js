@@ -23,6 +23,7 @@ const getAddProduct = (req, res, next) => {
 		path: "/add-product",
 		editMode: false,
 		isAuthenticated: isLoggedIn,
+		user: req.session.user,
 	});
 };
 
@@ -58,6 +59,7 @@ const getEditProduct = (req, res, next) => {
 			editMode: editing,
 			product: product,
 			isAuthenticated: isLoggedIn,
+			user: req.session.user,
 		});
 	});
 };
@@ -76,18 +78,26 @@ const postDeleteProduct = (req, res, next)=>{
 
 
 const getAdminProducts = (req, res, next)=>{
-	Product.find().then((products) =>{
-		const isLoggedIn = req.session.isLoggedIn;
-		res.render("adminProducts.ejs", {
-			products: products,
-			pageTitle: "Admin Products",
-			path: "/admin-product",
-			isAuthenticated: isLoggedIn,
+	// if(!req.session.isLoggedIn){
+	// 	return res.redirect('/login')
+	// }
+	Product.find({ userId: req.user._id})
+		.then((products) => {
+			const isLoggedIn = req.session.isLoggedIn;
+			res.render("adminProducts.ejs", {
+				products: products,
+				pageTitle: "Admin Products",
+				path: "/admin-product",
+				isAuthenticated: isLoggedIn,
+				user: req.session.user,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
 		});
-	}).catch(err=>{
-		console.log(err)
-	});
 }
+
+
 
 module.exports.postAddProduct = postAddProduct;
 module.exports.getAddProduct = getAddProduct;

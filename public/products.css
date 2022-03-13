@@ -23,7 +23,13 @@
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
-
+.card_header .see_detail {
+    color          : #37206d;
+    text-decoration: none;
+}
+.see_detail:hover {
+    color: #8a61e9;
+}
 .card_image img{
     width:300px;
 }

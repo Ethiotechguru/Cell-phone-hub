@@ -8,15 +8,19 @@
         <% if(products.length>0) {%> 
             <% products.forEach(p=>{%> 
                 <article class="card_header">
-                    <h3 class="product_title"><%=p.title %> </h3>
+                    <a href="/products/<%=p._id %> " class="see_detail"><h3 class="product_title"><%=p.title %> </h3></a>
                     <div class="card_image">
-                        <img src=<%=p.imgUrl %> alt="<%=p.title %> ">
+                        <a href="/products/<%=p._id %> " class="see_detail"><img src=<%=p.imgUrl %> alt="<%=p.title %> "></a>
                     </div>
                     <div class="card_content">
                         <h4 class="product_price">
                             $<%= p.price %> 
                         </h4>
-                        <p class="product_description"><%=p.description %> </p>
+                        <% if(p.description.length>40){%> 
+                            <p class="product_description"><a class="see_detail" href="/products/<%=p._id %>"><%=p.description.substring(0,30)%>...</a> </p>
+                        <% }else{ %>
+                            <p class="product_description"><a class="see_detail" href="/products/<%=p._id %>"><%=p.description%></a></p>
+                        <% } %> 
                     </div>
                     <div class="card_action">
                         <form  action="/cart" method="POST">

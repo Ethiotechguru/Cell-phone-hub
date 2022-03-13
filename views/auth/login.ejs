@@ -9,11 +9,25 @@
             <h1>Log In</h1>
             <div class="form_control">
                 <label for="email">Email</label>
-                <input type="email" name="email">
+                <input class="e" type="email" name="email">
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input class="p" type="password" name="password">
                 <button type="submit">Log In</button>
+                
             </div>
+            <input type="hidden" name="_csrf" value="csrfToken">
         </form>
     </div>
+    <script>
+        (function(){
+            let emailInput = document.querySelector('.e');
+            let passInput = document.querySelector('.p')
+            const btn = document.querySelector('.form_control').querySelector('button');
+            btn.addEventListener('click', (e)=>{
+                // e.preventDefault();
+                console.log(emailInput.value, passInput.value)
+            })
+        }())
+    </script>
+    
     <%-include('../inc/footer.ejs') %> 

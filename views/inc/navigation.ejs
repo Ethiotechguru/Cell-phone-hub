@@ -20,23 +20,26 @@
                         <a href="/admin-product" class="<%= path=== '/admin-product' ? 'active' : '' %> ">
                             <li class="nav_item">Admin</li>
                         </a>
-                        <!-- <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
-                            <li class="nav_item">Logout</li>
-                        </a> -->
-                         <!-- <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> "> -->
-                            <form  class="<%= path=== '/login' ? 'active' : '' %> " action="/logout" method="POST">
-                                <button class="nav_item"  type="submit">Logout</button>
-                            </form>
-                            <!-- <li class="nav_item">Logout</li> -->
-                        <!-- </a> -->
+                        <form  class="<%= path=== '/login' ? 'active' : '' %> " action="/logout" method="POST">
+                            <button class="nav_item"  type="submit">Logout</button>
+                            <input type="hidden" name="_csrf" value="<%=csrfToken %> ">
+                        </form>
                     <% }else{%>
                         <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
                             <li class="nav_item">Login</li>
+                        </a>
+                        <a href="/signup" class="<%= path=== '/signup' ? 'active' : '' %> ">
+                            <li class="nav_item">Sing Up</li>
                         </a>
                     <% } %> 
                 </ul>
                 <div class="venderLink-container">
                     <a href="#" class="venderLink">Become a Vender</a>
+                    <% if(user) {%> 
+                        <span>Hello <%=user.email %> </span>
+                    <% }else{%> 
+                        <a href="/signup">Sign up </a>
+                    <% } %> 
                 </div>
                 
                 <div class="search_box">
@@ -53,7 +56,7 @@
                     <a href="/cart" path="blabla">
                         <li class="mobile_nav_item">Cart</li>
                     </a>
-                    <% if(isAuthenticated) {%>
+                    <% if(isAuthenticated||'') {%>
                         <a href='/orders' path="blabla">
                             <li class="mobile_nav_item">Orders</li>
                         </a>
@@ -66,12 +69,16 @@
                         <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
                             <form class="nav_item" action="/logout" method="POST">
                                 <button type="submit">Logout</button>
+                                <input type="hidden" name="_csrf" value="<%=csrfToken %> ">
                             </form>
                             <!-- <li class="nav_item">Logout</li> -->
                         </a>
                     <% }else{%>
                         <a href="/login" class="<%= path=== '/login' ? 'active' : '' %> ">
                             <li class="nav_item">Login</li>
+                        </a>
+                        <a href="/signup" class="<%= path=== '/signup' ? 'active' : '' %> ">
+                            <li class="nav_item">Sing Up</li>
                         </a>
                     <% } %>
                     <a href="#" class="<%= path=== '/login' ? 'active' : '' %> ">
@@ -88,4 +95,3 @@
                     <div class="mode_btn"></div>
                 </div>
             </nav>
-

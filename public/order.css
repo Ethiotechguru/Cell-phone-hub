@@ -56,8 +56,17 @@
 }
 
 .no_product {
-    color     : white;
+    color: white;
     text-align: center;
+    padding: 10px;
+    background-color: gray;
+    border-radius: 10px;
+    margin: 6px auto;
+    width: fit-content;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 
 }
 .btn,
